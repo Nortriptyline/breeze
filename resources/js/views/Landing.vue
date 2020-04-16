@@ -3,7 +3,10 @@
 </template>
 <script>
 export default {
-    name: "Landing"
+    name: "Landing",
+    created: function() {
+        this.$store.dispatch("samples/index");
+    }
 };
 </script>
 

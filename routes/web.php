@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource('samples', 'SampleController');
+
 Route::fallback(function() {
     return view('default');
 });
