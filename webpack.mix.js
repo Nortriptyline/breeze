@@ -11,18 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.webpackConfig({
-   resolve: {
-      alias: {
-         '@': path.resolve(__dirname, 'resources/js/'),
-         '@scss': path.resolve(__dirname, 'resources/sass/'),
-      }
-   }
-})
-
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css')
-   .browserSync({
-      proxy: 'breeze.test',
-      notify: false
-   });
+    .sass('resources/sass/app.scss', 'public/css')
+    .browserSync({
+        proxy: 'http://breeze.test'
+    });

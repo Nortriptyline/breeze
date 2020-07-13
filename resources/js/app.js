@@ -1,7 +1,3 @@
-import Vue from 'vue'
-import router from './router'
-import store from './store'
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -9,6 +5,8 @@ import store from './store'
  */
 
 require('./bootstrap');
+
+window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -21,7 +19,7 @@ require('./bootstrap');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('app-view', require('./App.vue').default)
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31,6 +29,4 @@ Vue.component('app-view', require('./App.vue').default)
 
 const app = new Vue({
     el: '#app',
-    router,
-    store
 });
