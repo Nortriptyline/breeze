@@ -1,9 +1,32 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-// @import '~bootstrap/scss/bootstrap'
-@import '~bootstrap-material-design/scss/bootstrap-material-design';
+// @import '~bootstrap/scss/bootstrap';
+@import "~bootstrap-material-design/dist/css/bootstrap-material-design.min.css";
+
+@import "~hamburgers/dist/hamburgers.min.css";
+@import "~animate.css/animate.min.css";
+
+@import "navbar_collapse.scss";
+
+body {
+    padding-top: 96px;
+}
+
+div.navbar-translate {
+    a.navbar-brand {
+        span {
+            i.material-icons {
+                transform: translate(0, 5px);
+            }
+        }
+    }
+}
+
+main {
+    padding-top: 75px;
+}

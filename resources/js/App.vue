@@ -1,37 +1,31 @@
 <template>
     <div>
-        <header>
-            <nav class="navbar" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    <router-link :to="{name: 'Landing'}" class="navbar-item">Breeze</router-link>
-                </div>
-
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-
-                <div id="navbarMain" class="navbar-menu">
-                    <div class="navbar-start">
-                        
-                    </div>
-                    <div class="navbar-end">
-                        <div class="navbar-item">
-                            <div class="buttons">
-                                <a href="/login" class="button is-primary">Login</a>
-                                <a href="/register" class="button is-light">Register</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </nav>
-        </header>
-        <router-view />
+        <Navbar />
+        <main>
+            <router-view />
+        </main>
     </div>
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+import Navbar from "@/components/Navbar.vue";
+export default {
+    components: {
+        Navbar
+    },
+    watch: {
+        $route(to, from) {
+            // Close drawer on route changing if it is open.
+            if (this.active) {
+                this.$store.dispatch("navbar/toggle");
+            }
+        }
+    },
+    computed: {
+        ...mapState({
+            active: state => state.navbar.active
+        })
+    }
+};
 </script>
