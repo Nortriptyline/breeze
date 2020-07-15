@@ -28,7 +28,7 @@ export default {
         })
     },
     mounted: function() {
-        this.$store.dispatch("auth/synchronize");
+        // this.$store.dispatch("auth/synchronize");
     }
 };
 </script>

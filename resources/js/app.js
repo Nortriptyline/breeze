@@ -1,4 +1,3 @@
-// import Vue from 'vue';
 import router from './router';
 import store from './store';
 import i18n from './lang';
@@ -35,12 +34,11 @@ Vue.component('app-view', require('./App.vue').default);
 
 const app = new Vue({
     el: '#app',
-    router,
     store,
+    router,
     i18n
 });
 
 $(document).ready(function () {
     $('body').bootstrapMaterialDesign();
 });
-

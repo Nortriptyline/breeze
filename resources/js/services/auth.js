@@ -11,7 +11,7 @@ export default {
         return axios.post('/logout');
     },
 
-    register: function() {
+    register: function(user) {
         return axios.post('/register', user)
     },
 

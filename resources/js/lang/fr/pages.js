@@ -1,5 +1,6 @@
 export default {
     "Landing": "Accueil",
     "Login": "Connexion",
-    "Register": "Inscription"
+    "Register": "Inscription",
+    "Home": "Profile",
 }

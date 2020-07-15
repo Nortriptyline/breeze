@@ -12,12 +12,16 @@
                         {{ $t("general.Email address") }}
                     </label>
                     <input
+                        :class="{'is-invalid' : errors.email}"
                         type="email"
                         class="form-control"
                         id="email"
                         name="email"
                         v-model="credentials.email"
                     />
+                    <span v-for="message in errors.email" v-bind:key="message" class="invalid-feedback">
+                        {{ message }}
+                    </span>
                     <span class="bmd-help">
                         {{ $t("general.DataNotShared") }}
                     </span>
@@ -68,6 +72,7 @@
 </template>
 <script>
 import Navbar from "@/components/Navbar.vue";
+import { mapState } from 'vuex';
 
 export default {
     components: {
@@ -81,6 +86,11 @@ export default {
                 rememberme: false
             }
         };
+    },
+    computed: {
+        ...mapState({
+            errors: state => state.auth.errors
+        })
     },
     methods: {
         login: function() {

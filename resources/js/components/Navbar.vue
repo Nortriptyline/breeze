@@ -13,7 +13,7 @@
                                 <span v-else id="navBack">
                                     <i class="material-icons">arrow_back</i>
                                     <!-- {{ $route.name }} -->
-                                    {{ $t('pages.' + $route.name) }}
+                                    {{ $t("pages." + $route.name) }}
                                 </span>
                             </div>
 
@@ -34,34 +34,44 @@
                     </div>
 
                     <div class="collapse navbar-collapse" id="navbarToggler">
+                        <header class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <router-link
+                                class="text-center nav-link d-lg-none"
+                                :to="{ name: 'Landing' }"
+                            >
+                                BreezeLogo Breeze
+                            </router-link>
+                        </header>
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li class="nav-item">
+                            <li v-if="!user" class="nav-item">
                                 <router-link
-                                    class="nav-link d-lg-none"
-                                    :to="{ name: 'Landing' }"
-                                    >BreezeLogo Breeze</router-link
-                                >
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li class="nav-item">
-                                <router-link
-                                    v-if="!user"
                                     class="nav-link"
                                     :to="{ name: 'Login' }"
                                     >Connexion</router-link
                                 >
                             </li>
-                            <li class="nav-item">
+                            <li v-if="!user" class="nav-item">
                                 <router-link
-                                    v-if="!user"
                                     class="nav-link"
                                     :to="{ name: 'Register' }"
                                     >Inscription</router-link
                                 >
                             </li>
-                            <li class="nav-item" v-if="user">
-                                <a class="nav-link" href="#">Home</a>
+                            <li v-if="user" class="nav-item">
+                                <router-link
+                                    class="nav-link"
+                                    :to="{ name: 'Home' }"
+                                    >Home</router-link
+                                >
+                            </li>
+                            <li v-if="user" class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#"
+                                    @click.prevent="logout"
+                                >
+                                    Déconnexion
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -81,10 +91,13 @@ export default {
         },
         ...mapState({
             user: state => state.auth.user,
-            active: state => state.navbar.active,
+            active: state => state.navbar.active
         })
     },
     methods: {
+        logout: function() {
+            this.$store.dispatch("auth/logout");
+        },
         toggle: function() {
             this.$store.dispatch("navbar/toggle");
         }
