@@ -3,12 +3,13 @@ import Vuex from 'vuex'
 
 // import samples from './modules/samples'
 import navbar from './modules/navbar'
+import auth from './modules/auth'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
-        // samples,
-        navbar
+        auth,
+        navbar,
     }
 })

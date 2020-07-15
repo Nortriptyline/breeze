@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Auth::routes();
+Auth::routes();
 
-Route::resource('samples', 'SampleController');
+Route::get('/synchronize', 'Auth\LoginController@synchronizeClient');
+// Route::resource('samples', 'SampleController');
 
 Route::fallback(function() {
     return view('default');

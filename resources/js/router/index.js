@@ -15,7 +15,10 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-        component: Login
+        component: Login,
+        meta: {
+            requiresGuest: true,
+        }
     },
     {
         path: '/register',
@@ -31,5 +34,16 @@ const router = new VueRouter({
     routes
 });
 
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresGuest)) {
+        if (localStorage.getItem('user') != null) {
+            next({ name: 'Landing' })
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
+})
 
 export default router;

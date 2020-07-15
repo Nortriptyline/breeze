@@ -26,6 +26,9 @@ export default {
         ...mapState({
             active: state => state.navbar.active
         })
+    },
+    mounted: function() {
+        this.$store.dispatch("auth/synchronize");
     }
 };
 </script>

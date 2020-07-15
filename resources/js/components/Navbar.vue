@@ -46,6 +46,7 @@
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item">
                                 <router-link
+                                    v-if="!user"
                                     class="nav-link"
                                     :to="{ name: 'Login' }"
                                     >Connexion</router-link
@@ -53,12 +54,13 @@
                             </li>
                             <li class="nav-item">
                                 <router-link
+                                    v-if="!user"
                                     class="nav-link"
                                     :to="{ name: 'Register' }"
                                     >Inscription</router-link
                                 >
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" v-if="user">
                                 <a class="nav-link" href="#">Home</a>
                             </li>
                         </ul>
@@ -78,7 +80,8 @@ export default {
             return this.$route.name == "Landing";
         },
         ...mapState({
-            active: state => state.navbar.active
+            user: state => state.auth.user,
+            active: state => state.navbar.active,
         })
     },
     methods: {
