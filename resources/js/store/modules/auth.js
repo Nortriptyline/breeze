@@ -3,7 +3,6 @@ import router from '../../router'
 
 const state = {
     user: {},
-    errors: false,
 }
 
 const getters = {
@@ -28,7 +27,7 @@ const actions = {
             })
             .catch(error => {
                 if (error.response.status === 422) {
-                    commit('setErrors', error.response.data.errors)
+                    commit("general/setErrors", error.response.data.errors, {root: true})
                 }
             });
     },
@@ -85,10 +84,6 @@ const mutations = {
     removeAuthenticatedUser: function (state) {
         localStorage.removeItem('user')
         state.user = false
-    },
-
-    setErrors: function(state, errors) {
-        state.errors = errors
     },
 }
 

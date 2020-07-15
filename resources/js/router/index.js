@@ -47,7 +47,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     // Check user authentication status on every page
     store.dispatch('auth/synchronize')
-    
+    store.dispatch('general/removeErrors')
+
     // User must be a guest (Example: login page)
     if (to.matched.some(record => record.meta.requiresGuest)) {
         if (localStorage.getItem('user') != null) {

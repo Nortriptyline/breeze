@@ -2265,7 +2265,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
     errors: function errors(state) {
-      return state.auth.errors;
+      return state.general.errors;
     }
   })),
   methods: {
@@ -53462,7 +53462,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 });
 router.beforeEach(function (to, from, next) {
   // Check user authentication status on every page
-  _store__WEBPACK_IMPORTED_MODULE_6__["default"].dispatch('auth/synchronize'); // User must be a guest (Example: login page)
+  _store__WEBPACK_IMPORTED_MODULE_6__["default"].dispatch('auth/synchronize');
+  _store__WEBPACK_IMPORTED_MODULE_6__["default"].dispatch('general/removeErrors'); // User must be a guest (Example: login page)
 
   if (to.matched.some(function (record) {
     return record.meta.requiresGuest;
@@ -53544,14 +53545,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/navbar */ "./resources/js/store/modules/navbar.js");
 /* harmony import */ var _modules_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/auth */ "./resources/js/store/modules/auth.js");
+/* harmony import */ var _modules_general__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/general */ "./resources/js/store/modules/general.js");
 
  // import samples from './modules/samples'
+
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
+    general: _modules_general__WEBPACK_IMPORTED_MODULE_4__["default"],
     auth: _modules_auth__WEBPACK_IMPORTED_MODULE_3__["default"],
     navbar: _modules_navbar__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
@@ -53573,8 +53577,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var state = {
-  user: {},
-  errors: false
+  user: {}
 };
 var getters = {
   user: function user(state) {
@@ -53595,7 +53598,9 @@ var actions = {
       _router__WEBPACK_IMPORTED_MODULE_1__["default"].push('/home');
     })["catch"](function (error) {
       if (error.response.status === 422) {
-        commit('setErrors', error.response.data.errors);
+        commit("general/setErrors", error.response.data.errors, {
+          root: true
+        });
       }
     });
   },
@@ -53653,9 +53658,47 @@ var mutations = {
   removeAuthenticatedUser: function removeAuthenticatedUser(state) {
     localStorage.removeItem('user');
     state.user = false;
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/general.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/modules/general.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  errors: false
+};
+var getters = {};
+var actions = {
+  removeErrors: function removeErrors(_ref) {
+    var commit = _ref.commit;
+    commit('removeErrors');
   },
+  setErrors: function setErrors(_ref2, errors) {
+    var commit = _ref2.commit;
+    commit('setErrors', errors);
+  }
+};
+var mutations = {
   setErrors: function setErrors(state, errors) {
     state.errors = errors;
+  },
+  removeErrors: function removeErrors(state) {
+    state.errors = false;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
