@@ -53607,10 +53607,20 @@ var actions = {
   logout: function logout(_ref2) {
     var commit = _ref2.commit;
     _services_auth__WEBPACK_IMPORTED_MODULE_0__["default"].logout().then(function (response) {
-      commit('removeAuthenticatedUser');
-      _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
-        name: 'Landing'
-      });
+      commit('removeAuthenticatedUser'); // Permet de récupérer un objet Route de et déterminer les métas appliquées
+
+      var route = _router__WEBPACK_IMPORTED_MODULE_1__["default"].match(window.location.pathname); // Si la route actuelle n'a pas besoin d'être login, on ferme le drawer,
+      // Sinon on redirige sur la page d'accueil.
+
+      if (route.meta.requiresAuth) {
+        _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
+          name: 'Landing'
+        });
+      } else {
+        commit('navbar/toggle', '', {
+          root: true
+        });
+      }
     });
   },
   register: function register(_ref3, newUser) {

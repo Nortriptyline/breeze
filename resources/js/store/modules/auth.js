@@ -36,7 +36,16 @@ const actions = {
         authService.logout()
             .then(response => {
                 commit('removeAuthenticatedUser');
-                router.push({name: 'Landing'});
+
+                // Permet de récupérer un objet Route de et déterminer les métas appliquées
+                const route = router.match(window.location.pathname)
+                // Si la route actuelle n'a pas besoin d'être login, on ferme le drawer,
+                // Sinon on redirige sur la page d'accueil.
+                if (route.meta.requiresAuth) {
+                    router.push({name: 'Landing'});
+                } else {
+                    commit('navbar/toggle', '', {root: true})
+                }
             })
     },
 
