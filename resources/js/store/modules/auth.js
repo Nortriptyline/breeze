@@ -25,11 +25,6 @@ const actions = {
                 commit('setAuthenticatedUser', response.data);
                 router.push('/home');
             })
-            .catch(error => {
-                if (error.response.status === 422) {
-                    commit("general/setErrors", error.response.data.errors, {root: true})
-                }
-            });
     },
 
     logout: function({ commit }) {

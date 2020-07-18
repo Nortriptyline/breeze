@@ -1,6 +1,7 @@
 import router from './router';
 import store from './store';
 import i18n from './lang';
+import Axios from 'axios';
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -12,7 +13,12 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-
+Axios.interceptors.response.use(function (response) {
+    return response;
+}, function (error) {
+    store.dispatch('general/setErrors', error.response.data.errors);
+    return Promise.reject(error);
+})
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

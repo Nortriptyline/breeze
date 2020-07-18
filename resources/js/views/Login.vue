@@ -32,6 +32,7 @@
                         $t("general.Password")
                     }}</label>
                     <input
+                        :class="{'is-invalid' : errors.email}"
                         type="password"
                         class="form-control"
                         id="password"
@@ -51,7 +52,7 @@
                         Se rappeler de moi
                     </label>
                 </div>
-                <div>
+                <div class="row">
                     <button
                         @click.prevent="login()"
                         type="submit"
@@ -59,7 +60,8 @@
                     >
                         {{ $t("general.login") }}
                     </button>
-
+                </div>
+                <div class="row justify-content-center">
                     <router-link class="reset_link" :to="{ name: 'pwd_reset' }">
                         <small>
                         {{ $t("general.forgot password") }}
@@ -71,13 +73,9 @@
     </div>
 </template>
 <script>
-import Navbar from "@/components/Navbar.vue";
 import { mapState } from 'vuex';
 
 export default {
-    components: {
-        Navbar
-    },
     data: function() {
         return {
             credentials: {
@@ -102,8 +100,8 @@ export default {
 
 <style lang="scss" scoped>
 .reset_link {
-    display: block;
-    text-align: center;
+    // display: block;
+    // text-align: center;
     color: rgb(33, 37, 41);
 
 }
