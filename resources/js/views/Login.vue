@@ -4,7 +4,7 @@
             <h1>Connexion</h1>
             <p>Trouvez l'équipe qui vous correspond</p>
         </header>
-        <div class="container d-flex justify-content-center">
+        <div class="container d-flex justify-content-center mt-5">
             <form class="col-md-5">
                 <!-- Email -->
                 <div class="form-group">
@@ -62,7 +62,7 @@
                     </button>
                 </div>
                 <div class="row justify-content-center">
-                    <router-link class="reset_link" :to="{ name: 'pwd_reset' }">
+                    <router-link class="reset_link" :to="{ name: 'ForgotPassword' }">
                         <small>
                         {{ $t("general.forgot password") }}
                         </small>

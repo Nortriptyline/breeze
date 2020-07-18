@@ -4,6 +4,7 @@ import Landing from '../views/Landing.vue'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import ForgotPassword from '../views/password/ForgotPassword'
 import store from '../store';
 
 Vue.use(VueRouter)
@@ -34,6 +35,14 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: Register,
+        meta: {
+            requiresGuest: true,
+        }
+    },
+    {
+        path: '/password/forgot',
+        name: 'ForgotPassword',
+        component: ForgotPassword,
         meta: {
             requiresGuest: true,
         }

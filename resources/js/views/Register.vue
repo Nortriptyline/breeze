@@ -4,8 +4,8 @@
             <h1>Inscription</h1>
             <p>Trouvez l'équipe qui vous correspond</p>
         </header>
-        <div class="container d-flex justify-content-center">
-            <form class="col-md-6">
+        <div class="container d-flex justify-content-center mt-5">
+            <form class="col-md-5">
                 <!-- Name -->
                 <div class="form-group">
                     <label for="name" class="bmd-label-floating">
@@ -65,13 +65,6 @@
                             name="password"
                             v-model="user.password"
                         />
-                        <span
-                            v-for="message in errors.password"
-                            :key="message"
-                            class="invalid-feedback"
-                        >
-                            {{ message }}
-                        </span>
                     </div>
                     <!-- password confirmation -->
                     <div class="form-group col">
@@ -79,7 +72,11 @@
                             Confirmation
                         </label>
                         <input
-                            :class="{ 'is-invalid': errors.password || user.password != user.password_confirmation}"
+                            :class="{
+                                'is-invalid':
+                                    errors.password ||
+                                    user.password != user.password_confirmation
+                            }"
                             type="password"
                             class="form-control"
                             id="password_confirmation"
@@ -87,6 +84,13 @@
                             v-model="user.password_confirmation"
                         />
                     </div>
+                    <span
+                        v-for="message in errors.password"
+                        :key="message"
+                        class="invalid-feedback"
+                    >
+                        {{ message }}
+                    </span>
                 </div>
 
                 <div class="mt-3">
