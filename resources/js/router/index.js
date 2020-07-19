@@ -4,7 +4,8 @@ import Landing from '../views/Landing.vue'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
-import ForgotPassword from '../views/password/ForgotPassword'
+import ForgotPassword from '../views/password/Forgot'
+import ResetPassword from '../views/password/Reset'
 import store from '../store';
 
 Vue.use(VueRouter)
@@ -47,6 +48,15 @@ const routes = [
             requiresGuest: true,
         }
     },
+    {
+        path: '/password/reset/:token',
+        name: 'ResetPassword',
+        component: ResetPassword,
+        props: true,
+        meta: {
+            requiresGuest: true
+        }
+    }
 ]
 
 const router = new VueRouter({

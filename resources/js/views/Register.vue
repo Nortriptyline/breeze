@@ -69,7 +69,7 @@
                     <!-- password confirmation -->
                     <div class="form-group col">
                         <label for="password" class="bmd-label-floating">
-                            Confirmation
+                            {{ $t("general.Confirm Password")}}
                         </label>
                         <input
                             :class="{

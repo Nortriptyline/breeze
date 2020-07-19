@@ -1,5 +1,6 @@
 import authService from '@/services/auth'
 import router from '../../router'
+import auth from '../../services/auth'
 
 const state = {
     user: {},
@@ -67,6 +68,23 @@ const actions = {
                 }
             })
     },
+
+    pwd_email: function ({ commit }, email) {
+        authService.pwd_email(email)
+            .then(response => {
+                commit('email_sent')
+            })
+    },
+
+    pwd_reset: function({ commit }, credentials) {
+        authService.pwd_reset(credentials)
+            .then(response => {
+                // !!! On set l'utilisateur sinon on a un pb de synchro
+                commit('setAuthenticatedUser', response.data.user)
+                router.push({name: 'Home'})
+            })
+    }
+        
 }
 
 const mutations = {
@@ -89,6 +107,11 @@ const mutations = {
         localStorage.removeItem('user')
         state.user = false
     },
+
+    email_sent: function(state) {
+
+        console.log("email envoyé");
+    }
 }
 
 

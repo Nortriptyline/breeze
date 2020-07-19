@@ -15,12 +15,14 @@ export default {
         return axios.post('/register', user)
     },
 
-    pwd_reset: function() {
-        return axios.post('/password/email');
+    pwd_email: function(email) {
+        return axios.post('/password/email', {
+            email: email
+        });
     },
 
-    mail_reset: function() {
-        return axios.post('/password/reset');
+    pwd_reset: function(credentials) {
+        return axios.post('/password/reset', credentials);
     },
 
     synchronize: function() {
